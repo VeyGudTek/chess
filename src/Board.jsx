@@ -1,13 +1,12 @@
-import { Square } from "./Classes"
+import { Square, Pawn, Queen, King, Rook, Bishop, Knight } from "./Classes"
 
 const Board = () => {
-    const test = new Square('black')
-    console.log(test.image)
+    const test = new Queen('white')
 
     return (
         <>
             <div>
-                <img src={test.image}/>
+                <img src={test.get_image()}/>
             </div>
         </>
     )
