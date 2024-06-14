@@ -1,0 +1,10 @@
+.chess-board {
+    display: grid;
+    grid-template: repeat(8, 10%);
+}
+
+.square img {
+    display: block;
+    width: 100%;
+    object-fit: contain;
+}

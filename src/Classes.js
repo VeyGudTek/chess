@@ -20,10 +20,7 @@ export class Square{
     }
 
     get_image(){
-        if (this.piece !== null){
-            this.piece.get_image()
-        }
-        else if (this.color === 'black'){
+        if (this.color === 'black'){
             return blackSquare
         }else{
             return whiteSquare
