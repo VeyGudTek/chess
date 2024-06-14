@@ -19,6 +19,11 @@ export default class Chess{
             }
         }
 
+        for (let i = 0; i < 8; i++){
+            board[1][i].piece = new Pawn('black'), [1, i], this
+            board[6][i].piece = new Pawn('white'), [6, i], this
+        }
+
         return board
     }
 }
