@@ -57,6 +57,16 @@ export class Piece{
     get_image(){
         return this.images[this.color][this.name]
     }
+
+    check_in_bounds(x_offset, y_offset){
+        if (this.coordinates[1] + x_offset > 7 || this.coordinates[1] + x_offset < 0){
+            return false
+        }
+        if (this.coordinates[0] + y_offset > 7 || this.coordinates[0] + y_offset < 0){
+            return false
+        }
+        return true
+    }
 }
 
 export class Pawn extends Piece{
@@ -64,11 +74,45 @@ export class Pawn extends Piece{
         super(color, coordinates, game, 'pawn')
         this.start = true
     }
+
+    get_moves(){
+        var moves = []
+
+        var increment = this.color === 'black' ? 1 : -1
+
+        if (!this.check_in_bounds(0, increment)){
+            return moves
+        }
+
+        //Check forward Move
+        if (this.game.board[this.coordinates[0] + increment][this.coordinates[1]].piece === null){
+            moves.push([this.coordinates[0] + increment, this.coordinates[1]])
+
+            if (this.start && this.check_in_bounds(0, increment * 2) && this.game.board[this.coordinates[0] + increment * 2][this.coordinates[1]].piece === null){
+                moves.push([this.coordinates[0] + increment * 2, this.coordinates[1]])
+            }
+        }
+
+        //Check Attack Move
+        if ((this.check_in_bounds(1, increment)) && (this.game.board[this.coordinates[0] + increment][this.coordinates[1] + 1].piece) && (this.game.board[this.coordinates[0] + increment][this.coordinates[1] + 1].piece.color != this.color)){
+            moves.push([this.coordinates[0] + increment, this.coordinates[1] + 1])
+        }
+        if ((this.check_in_bounds(-1, increment)) && (this.game.board[this.coordinates[0] + increment][this.coordinates[1] - 1].piece) && (this.game.board[this.coordinates[0] + increment][this.coordinates[1] - 1].piece.color != this.color)){
+            moves.push([this.coordinates[0] + increment, this.coordinates[1] - 1])
+        }
+
+        return moves
+    }
 }
 
 export class Knight extends Piece{
     constructor(color, coordinates, game){
         super(color, coordinates, game, 'knight')
+    }
+
+    get_moves(){
+        var moves = []
+        return moves
     }
 }
 
@@ -76,11 +120,21 @@ export class King extends Piece{
     constructor(color, coordinates, game){
         super(color, coordinates, game, 'king')
     }
+
+    get_moves(){
+        var moves = []
+        return moves
+    }
 }
 
 export class Bishop extends Piece{
     constructor(color, coordinates, game){
         super(color, coordinates, game, 'bishop')
+    }
+
+    get_moves(){
+        var moves = []
+        return moves
     }
 }
 
@@ -88,10 +142,20 @@ export class Rook extends Piece{
     constructor(color, coordinates, game){
         super(color, coordinates, game, 'rook')
     }
+
+    get_moves(){
+        var moves = []
+        return moves
+    }
 }
 
 export class Queen extends Piece{
     constructor(color, coordinates, game){
         super(color, coordinates, game, 'queen')
+    }
+
+    get_moves(){
+        var moves = []
+        return moves
     }
 }
