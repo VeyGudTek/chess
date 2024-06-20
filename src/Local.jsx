@@ -23,7 +23,6 @@ const Local = () => {
             setSelected(null)
         }else if(selected){
             console.log('invalid moves')
-            console.log(selected.get_moves(), coordinates)
             setSelected(null)
         }else if (piece){
             console.log('new piece selected')

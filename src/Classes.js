@@ -152,6 +152,16 @@ export class King extends Piece{
 
     get_moves(){
         var moves = []
+
+        this.add_direction(moves, 0, 1)
+        this.add_direction(moves, 1, 1)
+        this.add_direction(moves, 1, 0)
+        this.add_direction(moves, 1, -1)
+        this.add_direction(moves, 0, -1)
+        this.add_direction(moves, -1, -1)
+        this.add_direction(moves, -1, 0)
+        this.add_direction(moves, -1, 1)
+
         return moves
     }
 }
@@ -163,6 +173,12 @@ export class Bishop extends Piece{
 
     get_moves(){
         var moves = []
+
+        this.add_direction(moves, 1, 1, true)
+        this.add_direction(moves, -1, 1, true)
+        this.add_direction(moves, 1, -1, true)
+        this.add_direction(moves, -1, -1, true)
+
         return moves
     }
 }
@@ -174,6 +190,12 @@ export class Rook extends Piece{
 
     get_moves(){
         var moves = []
+
+        this.add_direction(moves, 0, 1, true)
+        this.add_direction(moves, 0, -1, true)
+        this.add_direction(moves, -1, 0, true)
+        this.add_direction(moves, 1, 0, true)
+
         return moves
     }
 }
@@ -185,6 +207,16 @@ export class Queen extends Piece{
 
     get_moves(){
         var moves = []
+
+        this.add_direction(moves, 0, 1, true)
+        this.add_direction(moves, 0, -1, true)
+        this.add_direction(moves, -1, 0, true)
+        this.add_direction(moves, 1, 0, true)
+        this.add_direction(moves, 1, 1, true)
+        this.add_direction(moves, -1, 1, true)
+        this.add_direction(moves, 1, -1, true)
+        this.add_direction(moves, -1, -1, true)
+
         return moves
     }
 }
