@@ -52,5 +52,8 @@ export default class Chess{
         this.board[destination[0]][destination[1]].piece = this.board[origin[0]][origin[1]].piece
         this.board[destination[0]][destination[1]].piece.coordinates = [destination[0], destination[1]]
         this.board[origin[0]][origin[1]].piece = null
+        if (this.board[destination[0]][destination[1]].piece.name === 'pawn'){
+            this.board[destination[0]][destination[1]].piece.start = false
+        }
     }
 }
