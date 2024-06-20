@@ -67,6 +67,25 @@ export class Piece{
         }
         return true
     }
+
+    add_direction(moves, x_offset, y_offset, recursive=false, base_x_offset=0, base_y_offset=0){
+        if (!this.check_in_bounds(x_offset + base_x_offset, y_offset + base_y_offset)){
+            return 
+        }
+
+        if (this.game.board[this.coordinates[0] + y_offset + base_y_offset][this.coordinates[1] + x_offset + base_x_offset].piece === null){
+            moves.push([this.coordinates[0] + y_offset + base_y_offset, this.coordinates[1] + x_offset + base_x_offset])
+        }else if (this.game.board[this.coordinates[0] + y_offset + base_y_offset][this.coordinates[1] + x_offset + base_x_offset].piece.color !== this.color) {
+            moves.push([this.coordinates[0] + y_offset + base_y_offset, this.coordinates[1] + x_offset + base_x_offset])
+            return
+        }else{
+            return
+        }
+
+        if (recursive){
+            this.add_direction(moves, x_offset, y_offset, true, base_x_offset + x_offset, base_y_offset + y_offset)
+        }
+    }
 }
 
 export class Pawn extends Piece{
@@ -112,6 +131,16 @@ export class Knight extends Piece{
 
     get_moves(){
         var moves = []
+
+        this.add_direction(moves, 1, 2)
+        this.add_direction(moves, 2, 1)
+        this.add_direction(moves, -1, 2)
+        this.add_direction(moves, -2, 1)
+        this.add_direction(moves, 1, -2)
+        this.add_direction(moves, 2, -1)
+        this.add_direction(moves, -1, -2)
+        this.add_direction(moves, -2, -1)
+
         return moves
     }
 }
