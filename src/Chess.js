@@ -2,10 +2,10 @@ import { Square, Pawn, Queen, King, Rook, Bishop, Knight } from "./Classes"
 
 export default class Chess{
     constructor(){
-        this.board = this.createBoard()
+        this.board = this.create_board()
     }
 
-    createBoard(){
+    create_board(){
         var board = []
         
         for (let i = 0; i < 8; i++){
@@ -46,5 +46,11 @@ export default class Chess{
 
 
         return board
+    }
+
+    move_piece(origin, destination){
+        this.board[destination[0]][destination[1]].piece = this.board[origin[0]][origin[1]].piece
+        this.board[destination[0]][destination[1]].piece.coordinates = [destination[0], destination[1]]
+        this.board[origin[0]][origin[1]].piece = null
     }
 }

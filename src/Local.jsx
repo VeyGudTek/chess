@@ -3,17 +3,34 @@ import Chess from "./Chess"
 import Board from "./Board"
 
 const Local = () => {
-    var chess = new Chess()
+    const [chess, setChess] = useState(new Chess())
     const [selected, setSelected] = useState(null)
     
-    const handleClick = (coordinates, piece) => {
-        console.log('coords: ' + coordinates)
-        if (piece){
-            console.log('piece: ' + piece.name)
-            console.log('moves: ' + piece.get_moves())
-            setSelected(piece)
-        }else{
+    const coordIn = (set, target) => {
+        for (let i = 0; i < set.length; i++){
+            if (set[i][0] === target[0] && set[i][1] === target[1]){
+                return true
+            }
+        }
+        return false
+    }
+
+    const handleClick = (coordinates, piece=null) => {
+        if (selected && coordIn(selected.get_moves(), coordinates)){
+            console.log('move piece')
+            chess.move_piece(selected.coordinates, coordinates)
+            setChess(chess)
             setSelected(null)
+        }else if(selected){
+            console.log('invalid moves')
+            console.log(selected.get_moves(), coordinates)
+            setSelected(null)
+        }else if (piece){
+            console.log('new piece selected')
+            setSelected(piece)
+        }
+        else{
+            console.log('nothing')
         }
     }
 
