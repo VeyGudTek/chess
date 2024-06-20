@@ -1,22 +1,7 @@
-import Chess from "./Chess"
-import { useState } from "react"
 import hit from "./assets/hit.png"
 import './board.css'
 
-const Board = () => {
-    const [selected, setSelected] = useState(null)
-    var chess = new Chess()
-    
-    const handleClick = (coordinates, piece) => {
-        console.log('coords: ' + coordinates)
-        if (piece){
-            console.log('piece: ' + piece.name)
-            console.log('moves: ' + piece.get_moves())
-            setSelected(piece)
-        }else{
-            setSelected(null)
-        }
-    }
+const Board = ({chess, handleClick, selected}) => {
 
     return (
         <>

@@ -1,13 +1,10 @@
-import { useState } from 'react'
-import Board from './Board'
 import './App.css'
+import Local from './Local'
 
 function App() {
-  const [count, setCount] = useState(0)
-
   return (
     <>
-      <Board/>
+      <Local/>
     </>
   )
 }
