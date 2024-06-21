@@ -48,6 +48,15 @@ export default class Chess{
         return board
     }
 
+    coordIn(set, target){
+        for (let i = 0; i < set.length; i++){
+            if (set[i][0] === target[0] && set[i][1] === target[1]){
+                return true
+            }
+        }
+        return false
+    }
+
     move_piece(origin, destination){
         this.board[destination[0]][destination[1]].piece = this.board[origin[0]][origin[1]].piece
         this.board[destination[0]][destination[1]].piece.coordinates = [destination[0], destination[1]]

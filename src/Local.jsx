@@ -5,18 +5,9 @@ import Board from "./Board"
 const Local = () => {
     const [chess, setChess] = useState(new Chess())
     const [selected, setSelected] = useState(null)
-    
-    const coordIn = (set, target) => {
-        for (let i = 0; i < set.length; i++){
-            if (set[i][0] === target[0] && set[i][1] === target[1]){
-                return true
-            }
-        }
-        return false
-    }
 
     const handleClick = (coordinates, piece=null) => {
-        if (selected && coordIn(selected.get_moves(), coordinates)){
+        if (selected && chess.coordIn(selected.get_moves(), coordinates)){
             console.log('move piece')
             chess.move_piece(selected.coordinates, coordinates)
             setChess(chess)
