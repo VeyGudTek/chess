@@ -67,6 +67,12 @@ export default class Chess{
         if (this.board[destination[0]][destination[1]].piece.name === 'pawn'){
             this.board[destination[0]][destination[1]].piece.start = false
         }
+        
+        if (this.turn === "white"){
+            this.turn = "black"
+        }else{
+            this.turn = "white"
+        }
     }
     
     get_all_moves(color, check_next=false){

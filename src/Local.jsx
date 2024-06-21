@@ -12,9 +12,11 @@ const Local = () => {
             chess.move_piece(selected.coordinates, coordinates)
             setChess(chess)
             setSelected(null)
-            console.log(chess.get_all_moves(chess.turn))
         }else if(selected){
             console.log('invalid moves')
+            setSelected(null)
+        }else if (piece && piece.color !== chess.turn){
+            console.log('not ' + piece.color + "'s turn")
             setSelected(null)
         }else if (piece){
             console.log('new piece selected')
