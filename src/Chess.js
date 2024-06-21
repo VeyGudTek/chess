@@ -3,8 +3,10 @@ import { Square, Pawn, Queen, King, Rook, Bishop, Knight } from "./Classes"
 export default class Chess{
     constructor(){
         this.board = this.create_board()
-        this.white_king = this.board[7][3].piece
-        this.black_king = this.board[0][3].piece
+        this.kings = {
+            'white': this.board[7][3].piece,
+            'black': this.board[0][3].piece
+        }
         this.turn = 'white'
     }
 
@@ -89,5 +91,20 @@ export default class Chess{
         }
 
         return moves
+    }
+
+    check_check(){
+        var enemy = 'white'
+        if (this.turn === 'white'){
+            enemy = 'black'
+        }
+
+        var moves = this.get_all_moves(enemy)
+
+        if(this.coordIn(moves, this.kings[this.turn].coordinates)){
+            return true
+        }else{
+            return false
+        }
     }
 }
