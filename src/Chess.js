@@ -3,6 +3,9 @@ import { Square, Pawn, Queen, King, Rook, Bishop, Knight } from "./Classes"
 export default class Chess{
     constructor(){
         this.board = this.create_board()
+        this.white_king = this.board[7][3].piece
+        this.black_king = this.board[0][3].piece
+        this.turn = 'white'
     }
 
     create_board(){
@@ -64,5 +67,21 @@ export default class Chess{
         if (this.board[destination[0]][destination[1]].piece.name === 'pawn'){
             this.board[destination[0]][destination[1]].piece.start = false
         }
+    }
+    
+    get_all_moves(color, check_next=false){
+        var moves = []
+
+        for (let i = 0; i < this.board.length; i++){
+            for (let j = 0; j < this.board[i].length; j++){
+                if (this.board[i][j].piece && this.board[i][j].piece.color === color){
+                    this.board[i][j].piece.get_moves().forEach((move)=>{
+                        moves.push(move)
+                    })
+                }
+            }
+        }
+
+        return moves
     }
 }

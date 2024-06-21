@@ -12,6 +12,7 @@ const Local = () => {
             chess.move_piece(selected.coordinates, coordinates)
             setChess(chess)
             setSelected(null)
+            console.log(chess.get_all_moves(chess.turn))
         }else if(selected){
             console.log('invalid moves')
             setSelected(null)
