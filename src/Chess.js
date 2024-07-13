@@ -83,7 +83,7 @@ export default class Chess{
         for (let i = 0; i < this.board.length; i++){
             for (let j = 0; j < this.board[i].length; j++){
                 if (this.board[i][j].piece && this.board[i][j].piece.color === color){
-                    this.board[i][j].piece.get_moves().forEach((move)=>{
+                    this.board[i][j].piece.get_moves(check_next).forEach((move)=>{
                         moves.push(move)
                     })
                 }

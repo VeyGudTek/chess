@@ -94,7 +94,7 @@ export class Pawn extends Piece{
         this.start = true
     }
 
-    get_moves(){
+    get_moves(check_next=true){
         var moves = []
 
         var increment = this.color === 'black' ? 1 : -1
@@ -129,7 +129,7 @@ export class Knight extends Piece{
         super(color, coordinates, game, 'knight')
     }
 
-    get_moves(){
+    get_moves(check_next=true){
         var moves = []
 
         this.add_direction(moves, 1, 2)
@@ -150,7 +150,7 @@ export class King extends Piece{
         super(color, coordinates, game, 'king')
     }
 
-    get_moves(){
+    get_moves(check_next=true){
         var moves = []
 
         this.add_direction(moves, 0, 1)
@@ -171,7 +171,7 @@ export class Bishop extends Piece{
         super(color, coordinates, game, 'bishop')
     }
 
-    get_moves(){
+    get_moves(check_next=true){
         var moves = []
 
         this.add_direction(moves, 1, 1, true)
@@ -188,7 +188,7 @@ export class Rook extends Piece{
         super(color, coordinates, game, 'rook')
     }
 
-    get_moves(){
+    get_moves(check_next=true){
         var moves = []
 
         this.add_direction(moves, 0, 1, true)
@@ -205,7 +205,7 @@ export class Queen extends Piece{
         super(color, coordinates, game, 'queen')
     }
 
-    get_moves(){
+    get_moves(check_next=true){
         var moves = []
 
         this.add_direction(moves, 0, 1, true)
