@@ -58,6 +58,28 @@ export class Piece{
         return this.images[this.color][this.name]
     }
 
+    filter_forks(moves){
+        var valid_moves = []
+        var original_coordinates = this.coordinates
+
+        moves.forEach((move) => {
+            this.game.board[original_coordinates[0]][original_coordinates[1]].piece = null
+            var old_piece = this.game.board[move[0]][move[1]].piece
+            this.game.board[move[0]][move[1]].piece = this
+            this.coordinates = move
+
+            if (!this.game.check_check()){
+                valid_moves.push(move)
+            }
+
+            this.game.board[original_coordinates[0]][original_coordinates[1]].piece = this
+            this.game.board[move[0]][move[1]].piece = old_piece
+            this.coordinates = original_coordinates
+        })
+
+        return valid_moves
+    }
+
     check_in_bounds(x_offset, y_offset){
         if (this.coordinates[1] + x_offset > 7 || this.coordinates[1] + x_offset < 0){
             return false
@@ -120,6 +142,10 @@ export class Pawn extends Piece{
             moves.push([this.coordinates[0] + increment, this.coordinates[1] - 1])
         }
 
+        if(check_next){
+            moves = this.filter_forks(moves)
+        }
+
         return moves
     }
 }
@@ -140,6 +166,10 @@ export class Knight extends Piece{
         this.add_direction(moves, 2, -1)
         this.add_direction(moves, -1, -2)
         this.add_direction(moves, -2, -1)
+
+        if(check_next){
+            moves = this.filter_forks(moves)
+        }
 
         return moves
     }
@@ -162,6 +192,10 @@ export class King extends Piece{
         this.add_direction(moves, -1, 0)
         this.add_direction(moves, -1, 1)
 
+        if(check_next){
+            moves = this.filter_forks(moves)
+        }
+
         return moves
     }
 }
@@ -179,6 +213,10 @@ export class Bishop extends Piece{
         this.add_direction(moves, 1, -1, true)
         this.add_direction(moves, -1, -1, true)
 
+        if(check_next){
+            moves = this.filter_forks(moves)
+        }
+
         return moves
     }
 }
@@ -195,6 +233,10 @@ export class Rook extends Piece{
         this.add_direction(moves, 0, -1, true)
         this.add_direction(moves, -1, 0, true)
         this.add_direction(moves, 1, 0, true)
+
+        if(check_next){
+            moves = this.filter_forks(moves)
+        }
 
         return moves
     }
@@ -216,6 +258,10 @@ export class Queen extends Piece{
         this.add_direction(moves, -1, 1, true)
         this.add_direction(moves, 1, -1, true)
         this.add_direction(moves, -1, -1, true)
+
+        if(check_next){
+            moves = this.filter_forks(moves)
+        }
 
         return moves
     }
