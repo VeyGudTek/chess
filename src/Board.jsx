@@ -1,4 +1,5 @@
 import hit from "./assets/hit.png"
+import selected_png from "./assets/selected.png"
 import './board.css'
 
 const Board = ({chess, handleClick, selected}) => {
@@ -13,6 +14,10 @@ const Board = ({chess, handleClick, selected}) => {
                         </div>
                     ))
                 ))}
+
+                {selected && <div className="square" style={{gridColumn: selected.coordinates[1] + 1, gridRow: selected.coordinates[0] + 1}}>
+                    <img src={selected_png} onClick={() => {handleClick([selected.coordinates[0], selected.coordinates[1]])}}/>
+                </div>}
 
                 {[0, 1, 2, 3, 4, 5, 6, 7].map((row) => (
                     [0, 1, 2, 3, 4, 5, 6, 7].map((col) => (
