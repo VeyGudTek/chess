@@ -2,6 +2,8 @@ import { useState } from "react"
 import Chess from "./Chess"
 import Board from "./Board"
 
+import "./interface.css"
+
 const Local = () => {
     const [chess, setChess] = useState(new Chess())
     const [selected, setSelected] = useState(null)
@@ -29,7 +31,24 @@ const Local = () => {
 
     return (
         <>
-            <Board chess={chess} handleClick={handleClick} selected={selected} />
+            <div className="interface">
+                <div className="pawn-conversion">
+                    <div className="pawn-option">
+                        <img src={chess.kings['white'].images[chess.turn]['knight']}/>
+                    </div>
+                    <div className="pawn-option">
+                        <img src={chess.kings['white'].images[chess.turn]['rook']}/>
+                    </div>
+                    <div className="pawn-option">
+                        <img src={chess.kings['white'].images[chess.turn]['bishop']}/>
+                    </div>
+                    <div className="pawn-option">
+                        <img src={chess.kings['white'].images[chess.turn]['queen']}/>
+                    </div>
+                </div>
+
+                <Board chess={chess} handleClick={handleClick} selected={selected} />
+            </div>
         </>
     )
 }
